@@ -1,0 +1,39 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/sub-page.png</file>
+        <file>images/mask.png</file>
+        <file>images/handle.png</file>
+        <file>images/cd.png</file>
+        <file>images/btn_volume2.png</file>
+        <file>images/btn_volume1.png</file>
+        <file>images/btn_previous2.png</file>
+        <file>images/btn_previous1.png</file>
+        <file>images/btn_play2.png</file>
+        <file>images/btn_play1.png</file>
+        <file>images/btn_pause2.png</file>
+        <file>images/btn_pause1.png</file>
+        <file>images/btn_next2.png</file>
+        <file>images/btn_next1.png</file>
+        <file>images/btn_menu2.png</file>
+        <file>images/btn_menu1.png</file>
+        <file>images/btn_listcircle2.png</file>
+        <file>images/btn_listcircle1.png</file>
+        <file>images/btn_favorite_yes.png</file>
+        <file>images/btn_favorite_no.png</file>
+        <file>res/BackButtonSound.wav</file>
+        <file>res/youxi.png</file>
+        <file>res/xiong2.png</file>
+        <file>res/xiong1.png</file>
+        <file>res/xiangce.png</file>
+        <file>res/lm.png</file>
+        <file>res/ll.png</file>
+        <file>res/keting.png</file>
+        <file>res/guang2.png</file>
+        <file>res/guang1.png</file>
+        <file>res/erji.png</file>
+        <file>res/dm.png</file>
+        <file>res/dl.png</file>
+        <file>res/diansi.png</file>
+        <file>res/xiongdong.png</file>
+    </qresource>
+</RCC>
