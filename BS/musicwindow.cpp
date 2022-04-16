@@ -237,7 +237,8 @@ void MusicWindow::musicLayout()
                         QSizePolicy::Minimum);
     label[1]->setMinimumSize(320, 320);
     QImage Image;
-    Image.load(":/images/cd.png");
+//   Image.load(":/images/cd.png");
+    Image.load(":/res/222.png");
     QPixmap pixmap = QPixmap::fromImage(Image);
     int with = 320;
     int height = 320;
@@ -280,7 +281,7 @@ void MusicWindow::musicLayout()
 
     /* 定义过滤器 */
     /* 设置标签文本 */
-    label[0]->setText("Q Music，Enjoy it！");
+    label[0]->setText("Wellcome Music! ");
     label[2]->setText("00:00");
     label[3]->setText("00:00");
     label[2]->setSizePolicy(QSizePolicy::Expanding,
@@ -321,7 +322,7 @@ void MusicWindow::musicLayout()
                         QSizePolicy::Maximum,
                         QSizePolicy::Maximum);
     QSpacerItem *hSpacer9 = new
-            QSpacerItem(0, 60,
+            QSpacerItem(0, 100,
                         QSizePolicy::Minimum,
                         QSizePolicy::Maximum);
 
@@ -330,14 +331,16 @@ void MusicWindow::musicLayout()
         pushButton[i]->setMaximumSize(25, 25);
     }
 
+    MCbtn->setMaximumSize(100,50);
+    MCbtn->setStyleSheet("color:white;");
     hBoxLayout[3]->addSpacerItem(hSpacer5);
-    hBoxLayout[3]->addWidget(pushButton[3]);
+    //hBoxLayout[3]->addWidget(pushButton[3]);
     hBoxLayout[3]->addSpacerItem(hSpacer6);
-    hBoxLayout[3]->addWidget(pushButton[4]);
+    //hBoxLayout[3]->addWidget(pushButton[4]);
     hBoxLayout[3]->addSpacerItem(hSpacer7);
-    hBoxLayout[3]->addWidget(pushButton[5]);
+    //hBoxLayout[3]->addWidget(pushButton[5]);
     hBoxLayout[3]->addSpacerItem(hSpacer8);
-    hBoxLayout[3]->addWidget(pushButton[6]);
+    //hBoxLayout[3]->addWidget(pushButton[6]);
     hBoxLayout[3]->addSpacerItem(hSpacer9);
     hBoxLayout[3]->addWidget(MCbtn);
    // hBoxLayout[3]->addSpacerItem(hSpacer10);

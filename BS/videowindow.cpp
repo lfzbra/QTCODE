@@ -101,7 +101,7 @@ VideoWindow::VideoWindow(QWidget *parent) : QMainWindow(parent)
 void VideoWindow::videoLayout()
 {
     /* 设置位置与大小,这里固定为800, 480 */
-    this->setGeometry(0, 0, 800, 480);
+  //  this->setGeometry(0, 0, 800, 480);
     //    this->setMinimumSize(800, 480);
     //    this->setMaximumSize(800, 480);
     QPalette pal;
@@ -229,6 +229,8 @@ void VideoWindow::videoLayout()
                         QSizePolicy::Expanding,
                         QSizePolicy::Maximum);
 
+    back->setMaximumSize(150,50);
+    back->setStyleSheet("color:white;");
     hBoxLayout[2]->addSpacing(20);
     hBoxLayout[2]->addWidget(pushButton[0]);
     hBoxLayout[2]->addSpacing(10);

@@ -11,6 +11,7 @@
 #include <QPaintEvent>
 #include<QDateTime>
 #include <QProcess>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,18 +35,31 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(1024, 600);
 #endif
     //时间获取和设置
+    QTime time = QTime::currentTime();
+    timer = new QTimer(this);
+    lcdnumber = new QLCDNumber(this);
     QDateTime current_date_time =QDateTime::currentDateTime();
-    QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
-    QLabel *label=new QLabel;
+    lcdnumber->setGeometry(412, 150, 200, 50);
+
+    lcdnumber->setDigitCount(8);
+    lcdnumber->setSegmentStyle(QLCDNumber::Flat);
+    lcdnumber->display(time.toString("hh:mm:ss"));
+    lcdnumber->setStyleSheet("color:white;");
+    timer->start(1000);
+    connect(timer, SIGNAL(timeout()), this,SLOT(timerTimeOut()));
+
+    //QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+    QString current_date =current_date_time.toString("yyyy.MM.dd");
+    label=new QLabel;
     label->setParent(this);
     QFont font;
     font.setFamily("华为新魏");
-    font.setPointSize(16);
+    font.setPointSize(20);
     //将字体设置到标签控件中
     label->setFont(font);
     label->setText(current_date);
-    //label->setStyleSheet("QLabel{background:rgba(255,0,0,128);}");
-    label->setGeometry(480,235,110,30);
+    label->setStyleSheet("color:white;");
+    label->setGeometry(20,20,200,50);
     label->setAttribute(Qt::WA_TransparentForMouseEvents);
 
     this->setMouseTracking(true);
@@ -117,6 +131,17 @@ MainWindow::~MainWindow()
 {
 
 }
+
+void MainWindow::timerTimeOut()
+ {
+     /* 当定时器计时 1000 毫秒后，刷新 lcd 显示当前系统时间 */
+    QTime time = QTime::currentTime();
+    /* 设置显示的样式 */
+    lcdnumber->display(time.toString("hh:mm:ss"));
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("yyyy.MM.dd");
+    label->setText(current_date);
+ }
 
 
 void MainWindow::paintEvent(QPaintEvent *)

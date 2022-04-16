@@ -319,14 +319,14 @@ void CWWindow::saveImageToLocal()
         //时间获取和设置
         QDateTime current_date_time =QDateTime::currentDateTime();
         QString current_date =current_date_time.toString("yyyy.MM.dd-hh:mm:ss.zzz-ddd");
-        QTime current_time =QTime::currentTime();
-        int a = current_time.hour();
-        int b = current_time.minute();
-        int c = current_time.second();
-        QString hour = QString::number(a);
-        QString minute = QString::number(b);
-        QString second = QString::number(c);
-        qDebug()<<"a="<<a<<"b="<<b<<"c="<<c<<"hour="<<hour<<"minute="<<minute<<"second="<<second<<"current_time"<<current_time;
+//        QTime current_time =QTime::currentTime();
+//        int a = current_time.hour();
+//        int b = current_time.minute();
+//        int c = current_time.second();
+//        QString hour = QString::number(a);
+//        QString minute = QString::number(b);
+//        QString second = QString::number(c);
+//        qDebug()<<"a="<<a<<"b="<<b<<"c="<<c<<"hour="<<hour<<"minute="<<minute<<"second="<<second<<"current_time"<<current_time;
         QString fileName =
                 QString("/home/root/photo/"+current_date+"test-%1.png").arg(wtnum);
         qDebug()<<"正在保存"<<fileName<<"图片,请稍候..."<<endl;

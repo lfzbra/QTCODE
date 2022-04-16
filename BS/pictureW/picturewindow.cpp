@@ -17,8 +17,8 @@ PictureWindow::PictureWindow(QWidget *parent) : QMainWindow(parent)
     back->setMaximumHeight(70);
     back->setMaximumWidth(200);
     connect(back,&QPushButton::clicked,this,[=](){
-        namelabel->setText("未打开文件");
         graphicsScene->clear();
+        namelabel->setText("未打开文件");
         emit this->PictureWindowback();
 
     });
