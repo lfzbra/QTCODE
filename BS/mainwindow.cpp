@@ -12,6 +12,8 @@
 #include<QDateTime>
 #include <QProcess>
 #include <QTime>
+#include <QDebug>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,22 +36,26 @@ MainWindow::MainWindow(QWidget *parent)
     /* 否则则设置主窗体大小为800x480 */
     this->resize(1024, 600);
 #endif
+    //获取网络时间
+    webtime =new webTimeGetter(this);
+    webtime->tryGet();
     //时间获取和设置
     QTime time = QTime::currentTime();
     timer = new QTimer(this);
     lcdnumber = new QLCDNumber(this);
-    QDateTime current_date_time =QDateTime::currentDateTime();
+    //QDateTime current_date_time =QDateTime::currentDateTime();
     lcdnumber->setGeometry(412, 150, 200, 50);
 
     lcdnumber->setDigitCount(8);
     lcdnumber->setSegmentStyle(QLCDNumber::Flat);
-    lcdnumber->display(time.toString("hh:mm:ss"));
+    //lcdnumber->display(time.toString("hh:mm:ss"));
+    lcdnumber->display(QString::number(endtime[3])+":"+QString::number(endtime[4])+":"+QString::number(endtime[5]));
     lcdnumber->setStyleSheet("color:white;");
-    timer->start(1000);
     connect(timer, SIGNAL(timeout()), this,SLOT(timerTimeOut()));
 
     //QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
-    QString current_date =current_date_time.toString("yyyy.MM.dd");
+    //QString current_date =current_date_time.toString("yyyy.MM.dd");
+    //QString current_date = QString::number(endtime[0])+"."+QString::number(endtime[1])+"."+QString::number(endtime[2]);
     label=new QLabel;
     label->setParent(this);
     QFont font;
@@ -57,7 +63,8 @@ MainWindow::MainWindow(QWidget *parent)
     font.setPointSize(20);
     //将字体设置到标签控件中
     label->setFont(font);
-    label->setText(current_date);
+    //label->setText("0.0.0");
+    label->setText(QString::number(endtime[0])+"."+QString::number(endtime[1])+"."+QString::number(endtime[2]));
     label->setStyleSheet("color:white;");
     label->setGeometry(20,20,200,50);
     label->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -83,6 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
                     startSound->play();
                    this->hide();/*自身隐藏*/
                    next->show();/*生活界面显示*/
+
                });
     });
     QLabel *lifelabel =new QLabel;
@@ -124,6 +132,60 @@ MainWindow::MainWindow(QWidget *parent)
      //lifelabel->setAlignment(Qt::AlignCenter);
       Cwlabel->setAttribute(Qt::WA_TransparentForMouseEvents);
 
+      connect(webtime,&webTimeGetter::dateback,this,[=](){
+          webtime->readingData(endtime);
+          timer->start(1000);
+          qDebug()<<endtime[0]<<"=="<<endtime[1];
+          endtime[3]+=8;
+          QString minntest;
+          QString hourst;
+          QString secondst;
+          QString monthst;
+          QString dayst;
+          if(endtime[3]<10)
+          {
+              hourst = "0"+QString::number(endtime[3]);
+          }
+          else
+          {
+              hourst=QString::number(endtime[3]);
+          }
+          if(endtime[4]<10)
+          {
+              minntest = "0"+QString::number(endtime[4]);
+          }
+          else
+          {
+              minntest=QString::number(endtime[4]);
+          }
+          if(endtime[5]<10)
+          {
+              secondst = "0"+QString::number(endtime[5]);
+          }
+          else
+          {
+              secondst=QString::number(endtime[5]);
+          }
+          if(endtime[1]<10)
+          {
+              monthst = "0"+QString::number(endtime[1]);
+          }
+          else
+          {
+              monthst=QString::number(endtime[1]);
+          }
+          if(endtime[2]<10)
+          {
+              dayst = "0"+QString::number(endtime[2]);
+          }
+          else
+          {
+              dayst=QString::number(endtime[2]);
+          }
+          label->setText(QString::number(endtime[0])+"."+monthst+"."+dayst);
+          lcdnumber->display(hourst+":"+minntest+":"+secondst);
+
+      });
 
 }
 
@@ -136,11 +198,77 @@ void MainWindow::timerTimeOut()
  {
      /* 当定时器计时 1000 毫秒后，刷新 lcd 显示当前系统时间 */
     QTime time = QTime::currentTime();
+
+    //webtime->tryGet();
     /* 设置显示的样式 */
-    lcdnumber->display(time.toString("hh:mm:ss"));
-    QDateTime current_date_time =QDateTime::currentDateTime();
-    QString current_date =current_date_time.toString("yyyy.MM.dd");
-    label->setText(current_date);
+//    lcdnumber->display(time.toString("hh:mm:ss"));
+//    QDateTime current_date_time =QDateTime::currentDateTime();
+//    QString current_date =current_date_time.toString("yyyy.MM.dd");
+//    label->setText(current_date);
+    QString minntest;
+    QString hourst;
+    QString secondst;
+    QString monthst;
+    QString dayst;
+    endtime[5]++;
+    if(endtime[5]>59)
+    {
+        endtime[4]++;
+        if(endtime[4]>59)
+        {
+            endtime[3]++;
+            if(endtime[3]>23)
+            {
+                endtime[2]++;
+               endtime[3]=0;
+            }
+            endtime[4]=0;
+        }
+        endtime[5]=0;
+    }
+    if(endtime[3]<10)
+    {
+        hourst = "0"+QString::number(endtime[3]);
+    }
+    else
+    {
+        hourst=QString::number(endtime[3]);
+    }
+    if(endtime[4]<10)
+    {
+        minntest = "0"+QString::number(endtime[4]);
+    }
+    else
+    {
+        minntest=QString::number(endtime[4]);
+    }
+    if(endtime[5]<10)
+    {
+        secondst = "0"+QString::number(endtime[5]);
+    }
+    else
+    {
+        secondst=QString::number(endtime[5]);
+    }
+    if(endtime[1]<10)
+    {
+        monthst = "0"+QString::number(endtime[1]);
+    }
+    else
+    {
+        monthst=QString::number(endtime[1]);
+    }
+    if(endtime[2]<10)
+    {
+        dayst = "0"+QString::number(endtime[2]);
+    }
+    else
+    {
+        dayst=QString::number(endtime[2]);
+    }
+    label->setText(QString::number(endtime[0])+"."+monthst+"."+dayst);
+    lcdnumber->display(hourst+":"+minntest+":"+secondst);
+
  }
 
 

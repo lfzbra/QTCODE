@@ -119,11 +119,6 @@ void PictureWindow::openActionTriggered()
 void PictureWindow::Picturedelete()
 {
 
-//    QFileDialog fileDialog(this, QString("请选择文件夹"),QString("/"), tr("Files(*.png *.jpg *.bmp)"));
-//    fileDialog.setLabelText(QFileDialog::Accept,"确定");
-//    fileDialog.setLabelText(QFileDialog::Reject,"取消");
-
-
     /*调用系统打开文件窗口，设置窗口标题为“打开文件”，过滤文件名*/
     QString fileName1 = QFileDialog::getOpenFileName(
                 this,tr("打开文件"), "",

@@ -20,6 +20,7 @@
 #include <QString>
 #include <QTime>
 #include <QLCDNumber>
+#include <webtimegetter.h>
 
 class MainWindow : public QMainWindow
 {
@@ -41,6 +42,8 @@ public:
     QTimer *timer;
     QLCDNumber *lcdnumber;
 private:
+    webTimeGetter *webtime;
+    int endtime[6];
     int press_x;
     int press_y;
     int release_x;

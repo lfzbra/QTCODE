@@ -1,4 +1,4 @@
-QT       += core gui multimedia serialport multimediawidgets
+QT       += core gui multimedia serialport multimediawidgets network
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -34,6 +34,10 @@ contains(TARGET_ARCH, arm){
 }
 
 SOURCES += \
+    baidu/baiduai.cpp \
+    baidu/ocr.cpp \
+    baidu/photography.cpp \
+    baidu/tupian.cpp \
     bjwindow.cpp \
     camera.cpp \
     cwwindow.cpp \
@@ -49,9 +53,14 @@ SOURCES += \
     musicwindow.cpp \
     mybutton.cpp \
     pictureW/picturewindow.cpp \
-    videowindow.cpp
+    videowindow.cpp \
+    webtimegetter.cpp
 
 HEADERS += \
+    baidu/baiduai.h \
+    baidu/ocr.h \
+    baidu/photography.h \
+    baidu/tupian.h \
     bjwindow.h \
     camera.h \
     cwwindow.h \
@@ -66,7 +75,8 @@ HEADERS += \
     musicwindow.h \
     mybutton.h \
     pictureW/picturewindow.h \
-    videowindow.h
+    videowindow.h \
+    webtimegetter.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

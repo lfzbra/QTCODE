@@ -13,6 +13,7 @@
 #include "games/gamewindow.h"
 #include "pictureW/picturewindow.h"
 #include <QMouseEvent>
+#include "baidu/baiduai.h"
 
 LifeWindow::LifeWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -128,6 +129,28 @@ LifeWindow::LifeWindow(QWidget *parent) : QMainWindow(parent)
          Picturewindow->hide();
          this->show();
      });
+
+     //百度AI
+     BaiduAI *baiduai = new BaiduAI;
+
+     MyButton *baiduaibtn = new MyButton(":/res/shexiangtou.png");
+     baiduaibtn->move(475,250);
+     baiduaibtn->setParent(this);
+     connect(baiduaibtn,&MyButton::clicked,this,[=](){
+        baiduaibtn->zoom1();
+        baiduaibtn->zoom2();
+        QTimer::singleShot(500,this,[=](){
+            startSound->play();
+            this->hide();
+            baiduai->show();
+        });
+     });
+
+     connect(baiduai,&BaiduAI::BaiduAIback,this,[=](){
+         baiduai->hide();
+         this->show();
+     });
+
 }
 
 void LifeWindow::paintEvent(QPaintEvent *)
@@ -159,6 +182,12 @@ void LifeWindow::mouseReleaseEvent(QMouseEvent *event)
     qDebug()<<"松开x: %1,y: %1"<<press_x<<press_y;
 
     if(release_x-press_x>50)
+    {
+         emit this->LifeWindowback();
+        press_x=0;
+        release_x=0;
+    }
+    if(press_x-release_x>50)
     {
          emit this->LifeWindowback();
         press_x=0;

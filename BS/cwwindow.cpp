@@ -41,6 +41,7 @@ CWWindow::CWWindow(QWidget *parent) : QMainWindow(parent)
     CLbtn->setGeometry(900, 500, 100, 70);
     connect(CLbtn,&QPushButton::clicked,this,[=](){
         serialPort->close();
+
         emit this->CWWindowback();
     });
     /* 布局初始化 */

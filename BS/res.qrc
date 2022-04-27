@@ -91,5 +91,6 @@
         <file>cwMusic/wenduyichang_1.wav</file>
         <file>cwMusic/wenduzhengchang_1.wav</file>
         <file>res/222.png</file>
+        <file>res/shexiangtou.png</file>
     </qresource>
 </RCC>
