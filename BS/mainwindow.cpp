@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     webtime =new webTimeGetter(this);
     webtime->tryGet();
     //时间获取和设置
-    QTime time = QTime::currentTime();
+    //QTime time = QTime::currentTime();
     timer = new QTimer(this);
     lcdnumber = new QLCDNumber(this);
     //QDateTime current_date_time =QDateTime::currentDateTime();
@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(next,&LifeWindow::LifeWindowback,this,[=](){
         next->hide();
         this->show();
-
+        webtime->tryGet();
     });
     //生活界面
     connect(Lifebtn,&MyButton::clicked,this,[=](){
@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
                     startSound->play();
                    this->hide();/*自身隐藏*/
                    next->show();/*生活界面显示*/
-
+                        //timer->stop();
                });
     });
     QLabel *lifelabel =new QLabel;
@@ -115,13 +115,15 @@ MainWindow::MainWindow(QWidget *parent)
                      startSound->play();
                     this->hide();/*自身隐藏*/
                     CwWin->show();/*测温界面显示*/
+                    //timer->stop();
                 });
        }
        );
+
      connect(CwWin,&CWWindow::CWWindowback,this,[=](){
          CwWin->hide();
          this->show();
-
+        webtime->tryGet();
      });
      QLabel *Cwlabel =new QLabel;
      Cwlabel->setParent(this);
@@ -133,10 +135,12 @@ MainWindow::MainWindow(QWidget *parent)
       Cwlabel->setAttribute(Qt::WA_TransparentForMouseEvents);
 
       connect(webtime,&webTimeGetter::dateback,this,[=](){
+          //endtime[6]=NULL;
           webtime->readingData(endtime);
           timer->start(1000);
           qDebug()<<endtime[0]<<"=="<<endtime[1];
           endtime[3]+=8;
+          if(endtime[3]>23) endtime[3]-=23;
           QString minntest;
           QString hourst;
           QString secondst;
@@ -185,8 +189,23 @@ MainWindow::MainWindow(QWidget *parent)
           label->setText(QString::number(endtime[0])+"."+monthst+"."+dayst);
           lcdnumber->display(hourst+":"+minntest+":"+secondst);
 
-      });
+          //systemdate = QString("date -s "+"\""+QString::number(endtime[0])+"-"+monthst+"-"+dayst+" "+hourst+":"+minntest+":"+secondst+"\"");
+          systemdate="date -s \"\"";
+          systemdate.insert(9,QString::number(endtime[0])+QString("-")+monthst+QString("-")+dayst+QString(" ")+hourst+QString(":")+minntest+QString(":")+secondst);
+          char *c ;
+          QByteArray ba = systemdate.toLatin1();
+          c= ba.data();
+          const char* ss1 = c;
+          system(ss1);
+          qDebug()<<"ss1="<<ss1;
+         // system(systemdate);
 
+      });
+      QTimer::singleShot(60000,this,[=](){
+           webtime->tryGet();
+           qDebug()<<"一分钟定时";
+      });
+    timer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -268,6 +287,7 @@ void MainWindow::timerTimeOut()
     }
     label->setText(QString::number(endtime[0])+"."+monthst+"."+dayst);
     lcdnumber->display(hourst+":"+minntest+":"+secondst);
+
 
  }
 

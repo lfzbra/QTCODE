@@ -3,10 +3,10 @@
 dataConfig::dataConfig(QObject *parent) : QObject(parent)
 {
 
-     int array1[4][4] = {{1, 1, 1, 1},
-                        {1, 1, 0, 1},
-                        {1, 0, 0, 0},
-                        {1, 1, 0, 1} } ;
+     int array1[4][4] = {{1, 0, 1, 1},
+                        {0, 0, 0, 1},
+                        {1, 0, 1, 0},
+                        {1, 1, 0, 0} } ;
 
      QVector< QVector<int>> v;
      for(int i = 0 ; i < 4;i++)

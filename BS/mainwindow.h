@@ -42,6 +42,7 @@ public:
     QTimer *timer;
     QLCDNumber *lcdnumber;
 private:
+    QString systemdate;
     webTimeGetter *webtime;
     int endtime[6];
     int press_x;

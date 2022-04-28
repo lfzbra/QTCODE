@@ -87,7 +87,7 @@ void CWWindow::serialPortReadyRead()
              buf1 += str;
              bool ok = false;
             num[flag]=str.toInt(&ok, 16);
-             qDebug()<<"num="<<num[flag];
+             //qDebug()<<"num="<<num[flag];
              flag++;
              if(flag>=10)
                  flag=0;
@@ -319,7 +319,7 @@ void CWWindow::saveImageToLocal()
     if (!saveImage.isNull()) {
         //时间获取和设置
         QDateTime current_date_time =QDateTime::currentDateTime();
-        QString current_date =current_date_time.toString("yyyy.MM.dd-hh:mm:ss.zzz-ddd");
+        QString current_date =current_date_time.toString("yyyy.MM.dd-hh:mm:ss.zzz");
 //        QTime current_time =QTime::currentTime();
 //        int a = current_time.hour();
 //        int b = current_time.minute();
@@ -329,7 +329,7 @@ void CWWindow::saveImageToLocal()
 //        QString second = QString::number(c);
 //        qDebug()<<"a="<<a<<"b="<<b<<"c="<<c<<"hour="<<hour<<"minute="<<minute<<"second="<<second<<"current_time"<<current_time;
         QString fileName =
-                QString("/home/root/photo/"+current_date+"test-%1.png").arg(wtnum);
+                QString("/home/root/photo/"+current_date+"-check-%1.png").arg(wtnum);
         qDebug()<<"正在保存"<<fileName<<"图片,请稍候..."<<endl;
 
         /* save(arg1，arg2，arg3)重载函数，arg1代表路径文件名，

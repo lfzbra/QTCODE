@@ -34,12 +34,12 @@ void webTimeGetter::readingData(int endtime[])
     }
 
     time.setTime_t(seconds-epoch.secsTo(unixStart));
-    qDebug()<<"年"<<time.date().year();
-    qDebug()<<"月"<<time.date().month();
-    qDebug()<<"日"<<time.date().day();
-    qDebug()<<"时"<<time.time().hour();
-    qDebug()<<"分"<<time.time().minute();
-    qDebug()<<"秒"<<time.time().second();
+//    qDebug()<<"年"<<time.date().year();
+//    qDebug()<<"月"<<time.date().month();
+//    qDebug()<<"日"<<time.date().day();
+//    qDebug()<<"时"<<time.time().hour();
+//    qDebug()<<"分"<<time.time().minute();
+//    qDebug()<<"秒"<<time.time().second();
     int year = time.date().year();
     int month = time.date().month();
     int day = time.date().day();
