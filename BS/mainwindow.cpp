@@ -32,10 +32,13 @@ MainWindow::MainWindow(QWidget *parent)
     /* 默认是出厂系统的LED心跳的触发方式,想要控制LED，
      * 需要改变LED的触发方式，改为none，即无 */
     system("echo none > /sys/class/leds/sys-led/trigger");
+    //system("source ./home/root/shell/wifi/alientek_usb_wifi_setup.sh -m station -i lfz -p 12345678 -d wlan0");
+
 #else
     /* 否则则设置主窗体大小为800x480 */
     this->resize(1024, 600);
 #endif
+
     //获取网络时间
     webtime =new webTimeGetter(this);
     webtime->tryGet();

@@ -84,7 +84,7 @@ void Tupian::openfile()
 {
     /*调用系统打开文件窗口，设置窗口标题为“打开文件”，过滤文件名*/
      fileName = QFileDialog::getOpenFileName(
-                this,tr("打开文件"), "",
+                this,tr("打开文件"), "/home/root/",
                 tr("Files(*.png *.jpg *.bmp)")
                 );
     /* 定义QPixmap对象，指向fileName */

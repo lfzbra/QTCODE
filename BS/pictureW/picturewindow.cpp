@@ -91,7 +91,7 @@ void PictureWindow::openActionTriggered()
 
     /*调用系统打开文件窗口，设置窗口标题为“打开文件”，过滤文件名*/
     QString fileName = QFileDialog::getOpenFileName(
-                this,tr("打开文件"), "",
+                this,tr("打开文件"), "/home/root/photo/",
                 tr("Files(*.png *.jpg *.bmp)")
                 );
     /* 定义QPixmap对象，指向fileName */
@@ -121,7 +121,7 @@ void PictureWindow::Picturedelete()
 
     /*调用系统打开文件窗口，设置窗口标题为“打开文件”，过滤文件名*/
     QString fileName1 = QFileDialog::getOpenFileName(
-                this,tr("打开文件"), "",
+                this,tr("打开文件"), "/home/root/photo/",
                 tr("Files(*.png *.jpg *.bmp)")
                 );
   
